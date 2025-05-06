@@ -13,41 +13,41 @@ public class UpdateRecipeTestInvalidTokenTest : MyRecipeBookClassFixture
     {
     }
 
-    //[Fact]
-    //public async Task Error_Token_Invalid()
-    //{
-    //    var request = RequestRecipeJsonBuilder.Build();
+    [Fact]
+    public async Task Error_Token_Invalid()
+    {
+        var request = RequestRecipeJsonBuilder.Build();
 
-    //    var id = IdEncripterBuilder.Build().Encode(1);
+        var id = IdEncripterBuilder.Build().Encode(1);
 
-    //    var response = await DoPut($"{METHOD}/{id}", request, token: "tokenInvalid");
+        var response = await DoPut($"{METHOD}/{id}", request, token: "tokenInvalid");
 
-    //    response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-    //}
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
 
-    //[Fact]
-    //public async Task Error_Without_Token()
-    //{
-    //    var request = RequestRecipeJsonBuilder.Build();
+    [Fact]
+    public async Task Error_Without_Token()
+    {
+        var request = RequestRecipeJsonBuilder.Build();
 
-    //    var id = IdEncripterBuilder.Build().Encode(1);
+        var id = IdEncripterBuilder.Build().Encode(1);
 
-    //    var response = await DoPut($"{METHOD}/{id}", request, token: string.Empty);
+        var response = await DoPut($"{METHOD}/{id}", request, token: string.Empty);
 
-    //    response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-    //}
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
 
-    //[Fact]
-    //public async Task Error_Token_With_User_NotFound()
-    //{
-    //    var request = RequestRecipeJsonBuilder.Build();
+    [Fact]
+    public async Task Error_Token_With_User_NotFound()
+    {
+        var request = RequestRecipeJsonBuilder.Build();
 
-    //    var id = IdEncripterBuilder.Build().Encode(1);
+        var id = IdEncripterBuilder.Build().Encode(1);
 
-    //    var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid());
+        var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid());
 
-    //    var response = await DoPut($"{METHOD}/{id}", request, token: token);
+        var response = await DoPut($"{METHOD}/{id}", request, token: token);
 
-    //    response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-    //}
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
 }
