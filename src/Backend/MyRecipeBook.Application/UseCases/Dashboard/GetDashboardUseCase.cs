@@ -25,19 +25,19 @@ public class GetDashboardUseCase : IGetDashboardUseCase
         _blobStorageService = blobStorageService;
     }
 
-    // Método público assíncrono que retorna um objeto ResponseRecipesJson
+    
     public async Task<ResponseRecipesJson> Execute()
     {
-        // Obtém o usuário logado por meio do serviço de autenticação (provavelmente vem do contexto do token)
+        
         var loggedUser = await _loggedUser.User();
 
-        // Busca do repositório as receitas desse usuário para exibição no dashboard
+        
         var recipes = await _repository.GetForDashboard(loggedUser);
 
-        // Retorna um objeto de resposta contendo as receitas convertidas no formato simplificado (com imagem se houver)
+        
         return new ResponseRecipesJson
         {
-            // Usa o método de extensão MapToShortRecipeJson para mapear a lista de Recipe para ResponseShortRecipeJson
+            
             Recipes = await recipes.MapToShortRecipeJson(loggedUser, _blobStorageService, _mapper)
         };
     }

@@ -31,7 +31,7 @@ namespace MyRecipeBook.Application
             AddUseCases(services);
         }
 
-        //todos os métodos das configs de injeção de dependência precisam ter como parâmetro o IServiceCollection services
+        
         private static void AddAutoMapper(IServiceCollection services)
         {
             services.AddScoped(option => new AutoMapper.MapperConfiguration(autoMapperOptions =>
@@ -50,13 +50,13 @@ namespace MyRecipeBook.Application
                 Alphabet = configuration.GetValue<string>("Settings:IdCryptographyAlphabet")!
             });
             
-            //utilizando AddSingleton por recomendação de melhor uso da biblioteca SqidsEncoder
+            
             services.AddSingleton(sqids);
         }
 
         private static void AddUseCases(IServiceCollection services)
         {
-            //chamando como origem as interfaces de useCase e instanciando os useCases respectivos
+            
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IRegisterRecipeUseCase, RegisterRecipeUseCase>();
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();

@@ -21,7 +21,7 @@ namespace MyRecipeBook.Application.UseCases.User.Profile
         public async Task<ResponseUserProfileJson> Execute()
         {
             var user = await _loggedUser.User();
-            //retorno com automapper
+            
             return _mapper.Map<ResponseUserProfileJson>(user);
         }
     }

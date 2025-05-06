@@ -22,36 +22,36 @@ public class ExternalLoginUseCase : IExternalLoginUseCase
         _unitOfWork = unitOfWork;
     }
 
-    // Método assíncrono que executa uma operação baseada no nome e e-mail recebidos
+    
     public async Task<string> Execute(string name, string email)
     {
-        // Busca um usuário existente pelo e-mail informado
+        
         var user = await _repository.GetByEmail(email);
 
-        // Se o usuário não existir, será criado um novo usuário
-        // Também é possível direcionar o user para criar um cadastro pelo fluxo padrão para o cadastro na API ser criado
+        
+        
         if (user is null)
         {
-            // Cria um novo usuário com o nome e e-mail fornecidos e senha padrão "-"
+            
             user = new Domain.Entities.User
             {
                 Name = name,
                 Email = email,
                 Password = "-" 
-                // setando password padrão para usuários externos
-                // neste caso não haverá problema de segurança
-                // pois essa senha não será usada no fluxo de autenticação padrão da API (não autentica pelo fluxo de login padrão)
-                // só será autenticado quando o fluxo de login com o Google for válido
+                
+                
+                
+                
             };
 
-            // Adiciona o novo usuário no repositório
+            
             await _repositoryWrite.Add(user);
 
-            // Confirma a transação no banco de dados
+            
             await _unitOfWork.Commit();
         }
 
-        // Gera e retorna um token de acesso para o usuário
+        
         return _accessTokenGenerator.Generate(user.UserIdentifier);
     }
 }

@@ -20,7 +20,7 @@ public class GenerateRecipeUseCase : IGenerateRecipeUseCase
 
         var response = await _generator.Generate(request.Ingredients);
 
-        //retorno será feito através do GenerateRecipeDto, que é o retorno do OpenAI
+        
         return new ResponseGeneratedRecipeJson
         {
             Title = response.Title,

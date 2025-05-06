@@ -36,7 +36,7 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
 
         var user = await _repository.GetById(loggedUser.Id);
 
-        //recuperando a nova senha da request e criptografando
+        
         user.Password = _passwordEncripter.Encrypt(request.NewPassword);
 
         _repository.Update(user);
@@ -48,11 +48,11 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
     {
         var result = new ChangePasswordValidator().Validate(request);
 
-        //semelhante ao login, valida se o password atual (password fornecido) é igual o password registrado no banco para permitir alterações e seguir para a alteração de password
+        
         if (_passwordEncripter.IsValid(request.Password, loggedUser.Password).IsFalse())
             result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceMessagesExceptions.PASSWORD_DIFFERENT_CURRENT_PASSWORD));
 
-        //valida se o resultado é invalido e retorna uma exception genérica (400)
+        
         if (result.IsValid.IsFalse())
             throw new ErrorOnValidationException(result.Errors.Select(e => e.ErrorMessage).ToList());
     }

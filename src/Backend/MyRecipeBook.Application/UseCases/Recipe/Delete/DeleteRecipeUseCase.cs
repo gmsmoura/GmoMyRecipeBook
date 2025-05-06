@@ -31,17 +31,17 @@ public class DeleteRecipeUseCase : IDeleteRecipeUseCase
 
     public async Task Execute(long recipeId)
     {
-        //capturando o user logado
+        
         var loggedUser = await _loggedUser.User();
 
-        //capturando a recipe pertencente ao user logado
+        
         var recipe = await _repositoryRead.GetById(loggedUser, recipeId);
 
-        //se a recipe for nula, lançar exceção de não encontrada
+        
         if (recipe is null)
             throw new NotFoundException(ResourceMessagesExceptions.RECIPE_NOT_FOUND);
 
-        //se a imagem não for vazia, deletar a imagem do blob storage
+        
         if (recipe.ImageIdentifier.NotEmpty())
             await _blobStorageService.Delete(loggedUser, recipe.ImageIdentifier);
 
