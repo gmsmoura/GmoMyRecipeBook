@@ -14,70 +14,70 @@ using Xunit;
 namespace UseCases.Test.Recipe.Image;
 public class AddUpdateImageCoverUseCaseTest
 {
-    // Teste que garante o sucesso ao adicionar ou atualizar imagem em uma receita válida com imagem
+    
     [Theory]
-    [ClassData(typeof(ImageTypesInlineData))] // Fornece arquivos de imagem válidos
+    [ClassData(typeof(ImageTypesInlineData))] 
     public async Task Success(IFormFile file)
     {
-        (var user, _) = UserBuilder.Build(); // Cria um usuário fake
-        var recipe = RecipeBuilder.Build(user); // Cria uma receita associada ao usuário
+        (var user, _) = UserBuilder.Build(); 
+        var recipe = RecipeBuilder.Build(user); 
 
-        var useCase = CreateUseCase(user, recipe); // Instancia o caso de uso com mocks
+        var useCase = CreateUseCase(user, recipe); 
 
-        Func<Task> act = async () => await useCase.Execute(recipe.Id, file); // Ação a ser testada
+        Func<Task> act = async () => await useCase.Execute(recipe.Id, file); 
 
-        await act.Should().NotThrowAsync(); // Verifica que nenhuma exceção foi lançada
+        await act.Should().NotThrowAsync(); 
     }
 
-    // Teste que valida o comportamento ao adicionar uma imagem em uma receita que ainda não tinha imagem
+    
     [Theory]
     [ClassData(typeof(ImageTypesInlineData))]
     public async Task Success_Recipe_Did_Not_Have_Image(IFormFile file)
     {
-        (var user, _) = UserBuilder.Build(); // Cria usuário fake
-        var recipe = RecipeBuilder.Build(user); // Cria receita fake
-        recipe.ImageIdentifier = null; // Simula que a receita não tinha imagem antes
+        (var user, _) = UserBuilder.Build(); 
+        var recipe = RecipeBuilder.Build(user); 
+        recipe.ImageIdentifier = null; 
 
-        var useCase = CreateUseCase(user, recipe); // Instancia o caso de uso
+        var useCase = CreateUseCase(user, recipe); 
 
-        Func<Task> act = async () => await useCase.Execute(recipe.Id, file); // Executa o uso com imagem
+        Func<Task> act = async () => await useCase.Execute(recipe.Id, file); 
 
-        await act.Should().NotThrowAsync(); // Verifica que a execução foi bem-sucedida
+        await act.Should().NotThrowAsync(); 
 
-        recipe.ImageIdentifier.Should().NotBeNullOrWhiteSpace(); // Verifica que a imagem foi atribuída corretamente
+        recipe.ImageIdentifier.Should().NotBeNullOrWhiteSpace(); 
     }
 
-    // Teste que verifica o comportamento quando a receita não é encontrada (ID inválido)
+    
     [Theory]
     [ClassData(typeof(ImageTypesInlineData))]
     public async Task Error_Recipe_NotFound(IFormFile file)
     {
-        (var user, _) = UserBuilder.Build(); // Cria usuário
+        (var user, _) = UserBuilder.Build(); 
 
-        var useCase = CreateUseCase(user); // Cria o use case sem nenhuma receita cadastrada
+        var useCase = CreateUseCase(user); 
 
-        var act = async () => await useCase.Execute(1, file); // Tenta executar com ID inexistente
+        var act = async () => await useCase.Execute(1, file); 
 
-        (await act.Should().ThrowAsync<NotFoundException>()) // Deve lançar exceção de "não encontrado"
-            .Where(e => e.Message.Equals(ResourceMessagesExceptions.RECIPE_NOT_FOUND)); // Confirma a mensagem de erro
+        (await act.Should().ThrowAsync<NotFoundException>()) 
+            .Where(e => e.Message.Equals(ResourceMessagesExceptions.RECIPE_NOT_FOUND)); 
     }
 
-    // Teste que garante que arquivos não permitidos (ex: .txt) são rejeitados corretamente
+    
     [Fact]
     public async Task Error_File_Is_Txt()
     {
-        (var user, _) = UserBuilder.Build(); // Cria usuário
-        var recipe = RecipeBuilder.Build(user); // Cria receita
+        (var user, _) = UserBuilder.Build(); 
+        var recipe = RecipeBuilder.Build(user); 
 
-        var useCase = CreateUseCase(user, recipe); // Instancia o caso de uso
+        var useCase = CreateUseCase(user, recipe); 
 
-        var file = FormFileBuilder.Txt(); // Gera um arquivo .txt (inválido)
+        var file = FormFileBuilder.Txt(); 
 
-        var act = async () => await useCase.Execute(recipe.Id, file); // Tenta usar imagem inválida
+        var act = async () => await useCase.Execute(recipe.Id, file); 
 
-        (await act.Should().ThrowAsync<ErrorOnValidationException>()) // Espera exceção de validação
+        (await act.Should().ThrowAsync<ErrorOnValidationException>()) 
             .Where(e => e.GetErrorMessages().Count == 1 &&
-                e.GetErrorMessages().Contains(ResourceMessagesExceptions.ONLY_IMAGES_ACCEPTED)); // Verifica a mensagem de erro
+                e.GetErrorMessages().Contains(ResourceMessagesExceptions.ONLY_IMAGES_ACCEPTED)); 
     }
 
     private static AddUpdateImageCoverUseCase CreateUseCase(

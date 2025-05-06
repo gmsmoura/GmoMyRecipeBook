@@ -21,13 +21,13 @@ public class UpdateUserUseCaseTest
 
         var useCase = CreateUseCase(user);
 
-        //armazenando a função Execute() na variável act 
+        
         Func<Task> act = async () => await useCase.Execute(request);
 
-        //executando a função da variável act sem executar nenhum exception, isso para funções que não devolvem valor
+        
         await act.Should().NotThrowAsync();
 
-        //validando se Name e Email são iguais aos enviados via request
+        
         user.Name.Should().Be(request.Name);
         user.Email.Should().Be(request.Email);
     }
@@ -75,7 +75,7 @@ public class UpdateUserUseCaseTest
     {
         var unitOfWork = UnitOfWorkBuilder.Build();
 
-        //instaciando UserUpdateOnlyRepositoryBuilder para captura do user por Id
+        
         var userUpdateRepository = new UserUpdateOnlyRepositoryBuilder().GetById(user).Build();
         var loggedUser = LoggedUserBuilder.Build(user);
 
@@ -83,7 +83,7 @@ public class UpdateUserUseCaseTest
         if (email.NotEmpty())
             userReadOnlyRepositoryBuilder.ExistActiveUserWithEmail(email);
 
-        //parametros sendo recebidosa com: user logado, userUpdateRepository, userReadOnlyRepositoryBuilder e unidade de trabalho
+        
         return new UpdateUserUseCase(loggedUser, userUpdateRepository, userReadOnlyRepositoryBuilder.Build(), unitOfWork);
     }
 }

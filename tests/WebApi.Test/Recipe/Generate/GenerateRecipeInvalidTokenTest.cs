@@ -13,7 +13,7 @@ public class GenerateRecipeInvalidTokenTest : MyRecipeBookClassFixture
     {
     }
 
-    // Garante que a API retorna 401 Unauthorized quando o token informado é inválido.
+    
 
     [Fact]
     public async Task Error_Token_Invalid()
@@ -25,7 +25,7 @@ public class GenerateRecipeInvalidTokenTest : MyRecipeBookClassFixture
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
 
-    // Verifica que a API bloqueia o acesso (status 401) quando a requisição é feita sem token.
+    
 
     [Fact]
     public async Task Error_Without_Token()
@@ -37,7 +37,7 @@ public class GenerateRecipeInvalidTokenTest : MyRecipeBookClassFixture
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
 
-    // Testa se a API retorna 401 Unauthorized quando o token é válido, mas o usuário não existe no sistema.
+    
 
     [Fact]
     public async Task Error_Token_With_User_NotFound()

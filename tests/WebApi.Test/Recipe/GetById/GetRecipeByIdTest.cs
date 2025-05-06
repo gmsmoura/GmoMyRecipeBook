@@ -17,7 +17,7 @@ public class GetRecipeByIdTest : MyRecipeBookClassFixture
     private readonly string _recipeId;
     private readonly string _recipeTitle;
 
-    //gets para capturar o userIdentifier, recipeId e recipeTitle para serem usados nos testes
+    
     public GetRecipeByIdTest(CustomWebApplicationFactory factory) : base(factory)
     {
         _userIdentifier = factory.GetUserIdentifier();
@@ -25,7 +25,7 @@ public class GetRecipeByIdTest : MyRecipeBookClassFixture
         _recipeTitle = factory.GetRecipeTitle();
     }
 
-    //teste de integração para validar a busca de uma receita pelo id sendo success 200
+    
     [Fact]
     public async Task Success()
     {
@@ -43,7 +43,7 @@ public class GetRecipeByIdTest : MyRecipeBookClassFixture
         responseData.RootElement.GetProperty("title").GetString().Should().Be(_recipeTitle);
     }
 
-    //teste de integração para validar a busca de uma receita pelo id not found 404
+    
     [Theory]
     [ClassData(typeof(CultureInlineDataTest))]
     public async Task Error_Recipe_Not_Found(string culture)

@@ -2,7 +2,7 @@
 
 namespace MyRecipeBook.Infrastructure.Migrations.Versions
 {
-    //informando qual número e descrição da versão
+    
     [Migration(DatabaseVersions.IMAGES_FOR_RECIPES, "Add collumn on recipe table to save images")]
     public class Version0000003 : VersionBase
     {

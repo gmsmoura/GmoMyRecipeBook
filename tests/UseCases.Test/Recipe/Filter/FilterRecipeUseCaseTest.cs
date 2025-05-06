@@ -27,7 +27,7 @@ public class FilterRecipeUseCaseTest
 
         result.Should().NotBeNull();
         result.Recipes.Should().NotBeNullOrEmpty();
-        //utilização do HaveCount() para verificar a quantidade de receitas retornadas (elementos da collection)
+        
         result.Recipes.Should().HaveCount(recipes.Count);
     }
 
@@ -40,7 +40,7 @@ public class FilterRecipeUseCaseTest
 
         var request = RequestFilterRecipeJsonBuilder.Build();
         
-        //adicionando valor inválido para execução do erro
+        
         request.CookingTimes.Add((MyRecipeBook.Communication.Enums.CookingTime)1000);
 
         var useCase = CreateUseCase(user, recipes);

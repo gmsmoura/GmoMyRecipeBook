@@ -32,7 +32,7 @@ public class DeleteRecipeTest : MyRecipeBookClassFixture
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);
 
 
-        //após o teste, verificar se a receita foi realmente deletada com StatusCode 404 Not Found
+        
         response = await DoGet($"{METHOD}/{_recipeId}", token);
 
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);

@@ -13,7 +13,7 @@ public class GetRecipeByIdInvalidTokenTest : MyRecipeBookClassFixture
     {
     }
 
-    //teste para validar token inválido
+    
     [Fact]
     public async Task Error_Token_Invalid()
     {
@@ -24,7 +24,7 @@ public class GetRecipeByIdInvalidTokenTest : MyRecipeBookClassFixture
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
 
-    //teste para validar token vazio
+    
     [Fact]
     public async Task Error_Without_Token()
     {
@@ -35,7 +35,7 @@ public class GetRecipeByIdInvalidTokenTest : MyRecipeBookClassFixture
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
 
-    //teste para validar token com usuário não encontrado
+    
     [Fact]
     public async Task Error_Token_With_User_NotFound()
     {

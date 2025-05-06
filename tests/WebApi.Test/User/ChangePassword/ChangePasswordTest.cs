@@ -31,33 +31,33 @@ public class ChangePasswordTest : MyRecipeBookClassFixture
         var request = RequestChangePasswordJsonBuilder.Build();
         request.Password = _password;
 
-        //gerando um token válido para o user
+        
         var token = JwtTokenGeneratorBuilder.Build().Generate(_userIdentifier);
 
         var response = await DoPut(METHOD, request, token);
 
-        //testando se o statusCode é 200 Ok ou 204 NoContent
+        
         response.StatusCode.Should().Be(HttpStatusCode.OK);
 
-        //criando a requisição de login
+        
         var loginRequest = new RequestLoginJson
         {
             Email = _email,
             Password = _password,
         };
 
-        //teste de unauthorized após a troca efetiva do password acima
+        
         response = await DoPost(method: "login", request: loginRequest);
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
 
         loginRequest.Password = request.NewPassword;
 
-        //teste de success ok após a troca efetiva do password acima
+        
         response = await DoPost(method: "login", request: loginRequest);
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 
-    //teste de integração para new password vazio
+    
     [Theory]
     [ClassData(typeof(CultureInlineDataTest))]
     public async Task Error_NewPassword_Empty(string culture)

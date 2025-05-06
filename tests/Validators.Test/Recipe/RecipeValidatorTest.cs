@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Validators.Test.Recipe
 {
-    //testes unitários para Recipe
+    
     public class RecipeValidatorTest
     {
         [Fact]
@@ -54,10 +54,10 @@ namespace Validators.Test.Recipe
 
             var result = validator.Validate(request);
 
-            //validando que o retorno é false
+            
             result.IsValid.Should().BeFalse();
 
-            //validando a mensagem de erro a ser retornada para que seja somente uma mensagem e com a mensagem especificada
+            
             result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceMessagesExceptions.COOKING_TIME_NOT_SUPPORTED));
         }
 
@@ -71,10 +71,10 @@ namespace Validators.Test.Recipe
 
             var result = validator.Validate(request);
 
-            //validando que o retorno é false
+            
             result.IsValid.Should().BeFalse();
 
-            //validando a mensagem de erro a ser retornada para que seja somente uma mensagem e com a mensagem especificada
+            
             result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceMessagesExceptions.DIFFICULTY_LEVEL_NOT_SUPPORTED));
         }
 
@@ -92,10 +92,10 @@ namespace Validators.Test.Recipe
 
             var result = validator.Validate(request);
 
-            //validando que o retorno é false
+            
             result.IsValid.Should().BeFalse();
 
-            //validando a mensagem de erro a ser retornada para que seja somente uma mensagem e com a mensagem especificada
+            
             result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceMessagesExceptions.RECIPE_TITLE_EMPTY));
         }
 
@@ -177,8 +177,8 @@ namespace Validators.Test.Recipe
         {
             var request = RequestRecipeJsonBuilder.Build();
 
-            //pega o primeiro elemento da lista com First() e na prop Step faz ela receber o mesmo passo do último para simular o erro de steps duplicados na instruction
-            //ou seja a step 1 ficará com o mesmo value da última step
+            
+            
             request.Instructions.First().Step = request.Instructions.Last().Step;
 
             var validator = new RecipeValidator();

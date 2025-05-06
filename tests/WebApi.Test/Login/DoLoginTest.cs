@@ -10,7 +10,7 @@ using WebApi.Test.InlineData;
 
 namespace Validators.Test.Login
 {
-    //teste de integração
+    
     public class DoLoginTest : MyRecipeBookClassFixture
     {
         private readonly string METHOD = "login";
@@ -20,7 +20,7 @@ namespace Validators.Test.Login
 
         public DoLoginTest(CustomWebApplicationFactory factory) : base(factory)
         {
-            //acessando as funções abaixo que estão em CustomWebApplicationFactory para o retorno de email e password
+            
             _email = factory.GetEmail();
             _password = factory.GetPassword();
             _name = factory.GetName();
@@ -35,14 +35,14 @@ namespace Validators.Test.Login
                 Password = _password
             };
 
-            //informando o caminho da controler "login" e a request como parâmetro para PostAsJsonAsync e utilizando a função custom DoPost da classe custom MyRecipeBookClassFixture
-            //utilização de parâmetros nomeados para uso sem necessariamente ter uma ordem na chamada do método
+            
+            
             var response = await DoPost(method: METHOD, request: request); 
 
-            //informando a response que o retorno deve ser um StatusCode de Created (201)
+            
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
-            //verificando se todas as props da resposta estão sendo preenchidas conforme o esperado, maneira de boas práticas ao invés de utilizar o "Desserialize"
+            
             await using var responseBody = await response.Content.ReadAsStreamAsync();
             var responseData = await JsonDocument.ParseAsync(responseBody);
             responseData.RootElement.GetProperty("name").GetString().Should().NotBeNullOrWhiteSpace().And.Be(_name);
@@ -55,7 +55,7 @@ namespace Validators.Test.Login
         {
             var request = RequestLoginJsonBuilder.Build();
 
-            //utilizando a função custom DoPost da classe custom MyRecipeBookClassFixture para evitar repetição de código
+            
             var response = await DoPost(method: METHOD, request: request, culture: culture);
 
             response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);

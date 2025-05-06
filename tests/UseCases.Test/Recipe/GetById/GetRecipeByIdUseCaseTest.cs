@@ -14,7 +14,7 @@ public class GetRecipeByIdUseCaseTest
     [Fact]
     public async Task Success()
     {
-        //criando user e receita preenchendo o builder de Recipe com o userId da receita igual ao user criado
+        
         (var user, _) = UserBuilder.Build();
         var recipe = RecipeBuilder.Build(user);
 
@@ -22,7 +22,7 @@ public class GetRecipeByIdUseCaseTest
 
         var result = await useCase.Execute(recipe.Id);
 
-        //asserts para validação do teste
+        
         result.Should().NotBeNull();
         result.Id.Should().NotBeNullOrWhiteSpace();
         result.Title.Should().Be(recipe.Title);
@@ -42,7 +42,7 @@ public class GetRecipeByIdUseCaseTest
             .Where(e => e.Message.Equals(ResourceMessagesExceptions.RECIPE_NOT_FOUND));
     }
 
-    //recebendo user logado e a receita (opcional) como parâmetros
+    
     private static GetRecipeByIdUseCase CreateUseCase(
         MyRecipeBook.Domain.Entities.User user,
         MyRecipeBook.Domain.Entities.Recipe? recipe = null)

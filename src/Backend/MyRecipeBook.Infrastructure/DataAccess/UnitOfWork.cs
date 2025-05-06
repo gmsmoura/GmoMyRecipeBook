@@ -6,7 +6,7 @@ namespace MyRecipeBook.Infrastructure.DataAccess
     {
         private readonly MyRecipeBookDbContext _dbContext;
 
-        //construtor
+        
         public UnitOfWork(MyRecipeBookDbContext dbContext) => _dbContext = dbContext;
 
         public async Task Commit() => await _dbContext.SaveChangesAsync();

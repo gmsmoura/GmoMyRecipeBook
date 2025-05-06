@@ -20,7 +20,7 @@ public class DeleteRecipeUseCaseTest
 
         var act = async () => { await useCase.Execute(recipe.Id); };
 
-        //utilizando NotThrowAsync para verificar se não houve exceção e para o caso de NoContent (que não tem um retorno de outro status, como 200)
+        
         await act.Should().NotThrowAsync();
     }
 

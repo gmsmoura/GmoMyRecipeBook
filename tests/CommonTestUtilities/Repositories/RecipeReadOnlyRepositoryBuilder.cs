@@ -12,13 +12,13 @@ public class RecipeReadOnlyRepositoryBuilder
 
     public RecipeReadOnlyRepositoryBuilder Filter(User user, IList<Recipe> recipes)
     {
-        //utilização do It.IsAny para aceitar qualquer valor de FilterRecipesDto
+        
         _repository.Setup(repository => repository.Filter(user, It.IsAny<FilterRecipesDto>())).ReturnsAsync(recipes);
 
         return this;
     }
 
-    //mock retornando a receita pelo id e usuário logado caso a receita não seja nula
+    
     public RecipeReadOnlyRepositoryBuilder GetById(User user, Recipe? recipe)
     {
         if (recipe is not null)
@@ -27,7 +27,7 @@ public class RecipeReadOnlyRepositoryBuilder
         return this;
     }
 
-    //mock retornando as receitas do usuário logado quando a função GetForDashboard for chamada, estrutura semelhante ao método de Filter
+    
     public RecipeReadOnlyRepositoryBuilder GetForDashboard(User user, IList<Recipe> recipes)
     {
         _repository.Setup(i => i.GetForDashboard(user)).ReturnsAsync(recipes);

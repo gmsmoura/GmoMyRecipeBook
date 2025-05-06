@@ -8,10 +8,10 @@ namespace CommonTestUtilities.LoggedUser
     {
         public static ILoggedUser Build(User user)
         {
-            //cria o mock do user logado
+            
             var mock = new Mock<ILoggedUser>();
 
-            //configuração chamando a função User() de ILoggedUser para retorno do usuário 
+            
             mock.Setup(x => x.User()).ReturnsAsync(user);
 
             return mock.Object;

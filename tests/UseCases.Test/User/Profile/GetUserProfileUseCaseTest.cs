@@ -12,8 +12,8 @@ namespace UseCases.Test.User.Profile
         [Fact]
         public async Task Success()
         {
-            //variáveis de user e underline para setar o retorno do usuário
-            //underline para informar que terá uma senha mas que não será retornada (nesse caso usa-se underline para não ser obrigado a usar a variável em nenhum lugar
+            
+            
             (var user, var _) = UserBuilder.Build();
 
             var useCase = CreateUseCase(user);

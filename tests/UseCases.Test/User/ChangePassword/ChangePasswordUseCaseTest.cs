@@ -16,7 +16,7 @@ namespace UseCases.Test.User.ChangePassword
         [Fact]
         public async Task Success()
         {
-            //utilizando a entidade user com UserBuilder
+            
             (var user, var password) = UserBuilder.Build();
 
             var request = RequestChangePasswordJsonBuilder.Build();
@@ -24,10 +24,10 @@ namespace UseCases.Test.User.ChangePassword
 
             var useCase = CreateUseCase(user);
 
-            //armazenando a função Execute() na variável act 
+            
             Func<Task> act = async () => await useCase.Execute(request);
 
-            //executando a função da variável act sem executar nenhum exception, isso para funções que não devolvem valor
+            
             await act.Should().NotThrowAsync();
         }
 
@@ -36,7 +36,7 @@ namespace UseCases.Test.User.ChangePassword
         {
             (var user, var password) = UserBuilder.Build();
 
-            //instaciando a request manualmente para forçar o newPassword empty
+            
             var request = new RequestChangePasswordJson
             {
                 Password = password,
@@ -47,7 +47,7 @@ namespace UseCases.Test.User.ChangePassword
 
             Func<Task> act = async () => { await useCase.Execute(request); };
 
-            //ErrorsMessages.Count == 1 para informar que será somente uma mensagem de erro a ser retornado
+            
             (await act.Should().ThrowAsync<ErrorOnValidationException>())
                 .Where(e => e.GetErrorMessages().Count == 1 && e.GetErrorMessages().Contains(ResourceMessagesExceptions.PASSWORD_EMPTY));
         }
@@ -72,12 +72,12 @@ namespace UseCases.Test.User.ChangePassword
         {
             var unitOfWork = UnitOfWorkBuilder.Build();
 
-            //instaciando UserUpdateOnlyRepositoryBuilder para captura do user por Id
+            
             var userUpdateRepository = new UserUpdateOnlyRepositoryBuilder().GetById(user).Build();
             var loggedUser = LoggedUserBuilder.Build(user);
             var passwordEncripter = PasswordEncripterBuilder.Build();
 
-            //parametros sendo recebidosa com: user logado, userUpdateRepository, userReadOnlyRepositoryBuilder e unidade de trabalho
+            
             return new ChangePasswordUseCase(loggedUser, passwordEncripter, userUpdateRepository, unitOfWork);
         }
     }

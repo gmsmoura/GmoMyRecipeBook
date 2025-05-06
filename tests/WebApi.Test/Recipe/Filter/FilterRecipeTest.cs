@@ -25,7 +25,7 @@ public class FilterRecipeTest : MyRecipeBookClassFixture
     {
         _userIdentifier = factory.GetUserIdentifier();
 
-        //caputurando todas as informações necessárias de recipe através das functions contidas em CustomWebApplicationFactory para os testes
+        
         _recipeTitle = factory.GetRecipeTitle();
         _recipeCookingTime = factory.GetRecipeCookingTime();
         _recipedifficultyLevel = factory.GetRecipeDifficulty();
@@ -35,8 +35,8 @@ public class FilterRecipeTest : MyRecipeBookClassFixture
     [Fact]
     public async Task Success()
     {
-        //criando um novo request para filtrar as receitas e passando os valores de cada propriedade respectivamente
-        //para entrar em todos os ifs dentro de RecipeRepository (assim o SonarCloud não reclamará da falta de cobertura deles no teste)
+        
+        
         var request = new RequestFilterRecipeJson
         {
             CookingTimes = [(MyRecipeBook.Communication.Enums.CookingTime)_recipeCookingTime],
@@ -58,7 +58,7 @@ public class FilterRecipeTest : MyRecipeBookClassFixture
         responseData.RootElement.GetProperty("recipes").EnumerateArray().Should().NotBeNullOrEmpty();
     }
 
-    //teste para verificar se o retorno é NoContent quando a receita não existe
+    
     [Fact]
     public async Task Success_NoContent()
     {
@@ -72,7 +72,7 @@ public class FilterRecipeTest : MyRecipeBookClassFixture
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);
     }
 
-    //teste para verificar se o retorno é BadRequest quando o cookingTime é inválido
+    
     [Theory]
     [ClassData(typeof(CultureInlineDataTest))]
     public async Task Error_CookingTime_Invalid(string culture)

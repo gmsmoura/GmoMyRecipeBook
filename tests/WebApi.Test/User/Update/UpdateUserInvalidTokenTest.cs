@@ -5,7 +5,7 @@ using System.Net;
 
 namespace WebApi.Test.User.Update;
 
-//classe de teste de integração para validar user com token inválido, inexistente ou token com user não encontrado
+
 public class UpdateUserInvalidTokenTest : MyRecipeBookClassFixture
 {
     private const string METHOD = "user";

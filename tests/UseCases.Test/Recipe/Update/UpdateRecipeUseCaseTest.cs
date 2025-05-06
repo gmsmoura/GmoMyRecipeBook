@@ -23,7 +23,7 @@ public class UpdateRecipeUseCaseTest
 
         Func<Task> act = async () => await useCase.Execute(recipe.Id, request);
 
-        //utilização de NotThrowAsync devido o retorno da função ser nulo, ou seja, não é um retorno 200 e não lança nenhuma exceção
+        
         await act.Should().NotThrowAsync();
     }
 

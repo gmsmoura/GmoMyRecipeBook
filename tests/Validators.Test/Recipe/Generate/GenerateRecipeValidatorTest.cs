@@ -9,7 +9,7 @@ using Xunit;
 namespace Validators.Test.Recipe.Generate;
 public class GenerateRecipeValidatorTest
 {
-    // Testa se uma requisição válida com ingredientes corretos passa na validação.
+    
 
     [Fact]
     public void Success()
@@ -23,7 +23,7 @@ public class GenerateRecipeValidatorTest
         result.IsValid.Should().BeTrue();
     }
 
-    // Verifica se a validação falha quando o número de ingredientes excede o limite máximo permitido.
+    
 
     [Fact]
     public void Error_More_Maximum_Ingredient()
@@ -39,7 +39,7 @@ public class GenerateRecipeValidatorTest
         result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceMessagesExceptions.INVALID_NUMBER_INGREDIENTS));
     }
 
-    // Garante que a validação rejeita listas com ingredientes duplicados.
+    
 
     [Fact]
     public void Error_Duplicated_Ingredient()
@@ -55,7 +55,7 @@ public class GenerateRecipeValidatorTest
         result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceMessagesExceptions.DUPLICATED_INGREDIENTS_IN_LIST));
     }
 
-    // Confirma que ingredientes nulos, vazios ou com espaços em branco são considerados inválidos.
+    
 
     [Theory]
     [InlineData(null)]
@@ -75,7 +75,7 @@ public class GenerateRecipeValidatorTest
         result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceMessagesExceptions.INGREDIENT_EMPTY));
     }
 
-    // Testa se um ingrediente que não segue o padrão (ex: muito longo) é corretamente invalidado.
+    
 
     [Fact]
     public void Error_Ingredient_Not_Following_Pattern()

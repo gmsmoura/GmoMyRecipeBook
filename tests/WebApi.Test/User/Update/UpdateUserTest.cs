@@ -11,7 +11,7 @@ namespace WebApi.Test.User.Update;
 
 public class UpdateUserTest : MyRecipeBookClassFixture
 {
-    //método utilizado (controller)
+    
     private const string METHOD = "user";
 
     private readonly Guid _userIdentifier;
@@ -24,16 +24,16 @@ public class UpdateUserTest : MyRecipeBookClassFixture
     [Fact]
     public async Task Success()
     {
-        //gerando a requestr com Build()
+        
         var request = RequestUpdateUserJsonBuilder.Build();
 
-        //gernado token
+        
         var token = JwtTokenGeneratorBuilder.Build().Generate(_userIdentifier);
 
-        //chamando função Put para execução do update
+        
         var response = await DoPut(METHOD, request, token);
 
-        //retornando a response em caso de retorno para 200 Ok ou 204 NoContent
+        
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 

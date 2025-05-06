@@ -12,7 +12,7 @@ public class GetDashboardUseCaseTest
     [Fact]
     public async Task Success()
     {
-        //builder e coollection para receber um usuário e uma lista de receitas
+        
         (var user, _) = UserBuilder.Build();
         var recipes = RecipeBuilder.Collection(user);
 
@@ -20,8 +20,8 @@ public class GetDashboardUseCaseTest
 
         var result = await useCase.Execute();
 
-        //verificação de que o resultado não é nulo e que a lista de receitas não é nula, tem mais de 0 itens,
-        //todos os itens são únicos e todos os itens não são nulos
+        
+        
         result.Should().NotBeNull();
         result.Recipes.Should()
             .HaveCountGreaterThan(0)

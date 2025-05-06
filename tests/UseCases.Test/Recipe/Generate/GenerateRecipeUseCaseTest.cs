@@ -11,7 +11,7 @@ using Xunit;
 namespace UseCases.Test.Recipe.Generate;
 public class GenerateRecipeUseCaseTest
 {
-    // Verifica que o caso de uso executa com sucesso quando os dados são válidos, e o resultado gerado bate com os dados esperados (título, tempo de preparo e dificuldade).
+    
 
     [Fact]
     public async Task Success()
@@ -30,7 +30,7 @@ public class GenerateRecipeUseCaseTest
         result.Difficulty.Should().Be(MyRecipeBook.Communication.Enums.Difficulty.Low);
     }
 
-    // Garante que o caso de uso lança exceção de validação ao receber uma lista com ingredientes duplicados.
+    
 
     [Fact]
     public async Task Error_Duplicated_Ingredients()

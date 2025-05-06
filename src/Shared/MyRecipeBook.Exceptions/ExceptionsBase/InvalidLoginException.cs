@@ -5,7 +5,7 @@ namespace MyRecipeBook.Exceptions.ExceptionsBase
 {
     public class InvalidLoginException : MyRecipeBookException
     {
-        //tratando o retorno customizado da mensagem de erro com o retorno da string dentro de ResourceMessagesExceptions
+        
         public InvalidLoginException() : base(ResourceMessagesExceptions.EMAIL_OR_PASSWORD_INVALID)
         {
         }

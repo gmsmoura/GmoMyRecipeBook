@@ -9,7 +9,7 @@ public class RecipeUpdateOnlyRepositoryBuilder
 
     public RecipeUpdateOnlyRepositoryBuilder() => _repository = new Mock<IRecipeUpdateOnlyRepository>();
 
-    //function responsável para capturar o user e recipe para uso no teste de unidade
+    
     public RecipeUpdateOnlyRepositoryBuilder GetById(User user, Recipe? recipe)
     {
         if (recipe is not null)
