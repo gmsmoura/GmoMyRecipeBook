@@ -1,0 +1,37 @@
+trigger:
+- main
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: '881ae015-f5c2-4340-9345-b6541ca582c5'
+  imageRepository: 'apimyrecipebook'
+  containerRegistry: 'gmoapimyrecipebook.azurecr.io'
+  dockerfilePath: 'Dockerfile'
+  tag: '$(Build.BuildId)'
+
+  # Agent VM image name
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: DownloadSecureFile@1
+  displayName: Download appsettings.json
+  name: appsettings
+  inputs:
+    secureFile: 'appsettings.Production.json'
+
+- script: |
+    cp $(appsettings.secureFilePath) src/Backend/MyRecipeBook.API
+
+    
+- task: Docker@2
+  displayName: Build and push an image to container registry
+  inputs:
+    command: buildAndPush
+    repository: $(imageRepository)
+    dockerfile: $(dockerfilePath)
+    containerRegistry: $(dockerRegistryServiceConnection)
+    tags: |
+      latest
+      $(tag)
